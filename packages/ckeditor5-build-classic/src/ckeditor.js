@@ -5,6 +5,7 @@
 
 // The editor creator to use.
 import ClassicEditorBase from '@ckeditor/ckeditor5-editor-classic/src/classiceditor';
+import InlineEditorBase from '@ckeditor/ckeditor5-editor-inline/src/inlineeditor';
 
 import Essentials from '@ckeditor/ckeditor5-essentials/src/essentials';
 import UploadAdapter from '@ckeditor/ckeditor5-adapter-ckfinder/src/uploadadapter';
@@ -20,6 +21,7 @@ import ImageCaption from '@ckeditor/ckeditor5-image/src/imagecaption';
 import ImageStyle from '@ckeditor/ckeditor5-image/src/imagestyle';
 import ImageToolbar from '@ckeditor/ckeditor5-image/src/imagetoolbar';
 import ImageUpload from '@ckeditor/ckeditor5-image/src/imageupload';
+import ImageResize from '@ckeditor/ckeditor5-image/src/imageresize';
 import Indent from '@ckeditor/ckeditor5-indent/src/indent';
 import Link from '@ckeditor/ckeditor5-link/src/link';
 import List from '@ckeditor/ckeditor5-list/src/list';
@@ -29,12 +31,14 @@ import PasteFromOffice from '@ckeditor/ckeditor5-paste-from-office/src/pastefrom
 import Table from '@ckeditor/ckeditor5-table/src/table';
 import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar';
 import TextTransformation from '@ckeditor/ckeditor5-typing/src/texttransformation';
+import SimpleUploadAdapter from '@ckeditor/ckeditor5-upload/src/adapters/simpleuploadadapter';
 
-export default class ClassicEditor extends ClassicEditorBase {}
+class ClassicEditor extends ClassicEditorBase {}
+class InlineEditor extends InlineEditorBase {}
 
 // Plugins to include in the build.
-ClassicEditor.builtinPlugins = [
-	Essentials,
+const plugins = [
+    Essentials,
 	UploadAdapter,
 	Autoformat,
 	Bold,
@@ -48,6 +52,7 @@ ClassicEditor.builtinPlugins = [
 	ImageStyle,
 	ImageToolbar,
 	ImageUpload,
+	ImageResize,
 	Indent,
 	Link,
 	List,
@@ -56,12 +61,17 @@ ClassicEditor.builtinPlugins = [
 	PasteFromOffice,
 	Table,
 	TableToolbar,
-	TextTransformation
+	TextTransformation,
+	SimpleUploadAdapter
 ];
 
+ClassicEditor.builtinPlugins = plugins;
+InlineEditor.builtinPlugins = plugins;
+
+
 // Editor configuration.
-ClassicEditor.defaultConfig = {
-	toolbar: {
+const config = {
+    toolbar: {
 		items: [
 			'heading',
 			'|',
@@ -83,9 +93,35 @@ ClassicEditor.defaultConfig = {
 		]
 	},
 	image: {
+		styles: [
+			'alignLeft', 'alignCenter', 'alignRight'
+		],
+
+		// Configure the available image resize options.
+		resizeOptions: [
+			{
+				name: 'imageResize:original',
+				label: 'Original',
+				value: null
+			},
+			{
+				name: 'imageResize:50',
+				label: '50%',
+				value: '50'
+			},
+			{
+				name: 'imageResize:75',
+				label: '75%',
+				value: '75'
+			}
+		],
+
+		// You need to configure the image toolbar, too, so it shows the new style
+		// buttons as well as the resize buttons.
 		toolbar: [
-			'imageStyle:full',
-			'imageStyle:side',
+			'imageStyle:alignLeft', 'imageStyle:alignCenter', 'imageStyle:alignRight',
+			'|',
+			'imageResize',
 			'|',
 			'imageTextAlternative'
 		]
@@ -99,4 +135,11 @@ ClassicEditor.defaultConfig = {
 	},
 	// This value must be kept in sync with the language defined in webpack.config.js.
 	language: 'en'
+};
+
+ClassicEditor.defaultConfig = config;
+InlineEditor.defaultConfig = config;
+
+export default {
+    ClassicEditor, InlineEditor
 };
