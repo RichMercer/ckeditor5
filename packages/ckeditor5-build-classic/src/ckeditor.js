@@ -95,9 +95,7 @@ const config = {
 			'redo',
 			'|',
 			'imageUpload',
-			'mediaEmbed',
-			'blockQuote',
-			'insertTable',
+			'mediaEmbed'
 		]
 	},
 	image: {
