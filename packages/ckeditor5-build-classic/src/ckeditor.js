@@ -22,7 +22,10 @@ import ImageStyle from '@ckeditor/ckeditor5-image/src/imagestyle';
 import ImageToolbar from '@ckeditor/ckeditor5-image/src/imagetoolbar';
 import ImageUpload from '@ckeditor/ckeditor5-image/src/imageupload';
 import ImageResize from '@ckeditor/ckeditor5-image/src/imageresize';
+import AutoImage from '@ckeditor/ckeditor5-image/src/autoimage';
+import LinkImage from '@ckeditor/ckeditor5-link/src/linkimage';
 import Indent from '@ckeditor/ckeditor5-indent/src/indent';
+import IndentBlock from '@ckeditor/ckeditor5-indent/src/indentblock';
 import Link from '@ckeditor/ckeditor5-link/src/link';
 import List from '@ckeditor/ckeditor5-list/src/list';
 import MediaEmbed from '@ckeditor/ckeditor5-media-embed/src/mediaembed';
@@ -53,7 +56,10 @@ const plugins = [
 	ImageToolbar,
 	ImageUpload,
 	ImageResize,
+	AutoImage,
+	LinkImage,
 	Indent,
+	IndentBlock,
 	Link,
 	List,
 	MediaEmbed,
@@ -83,13 +89,15 @@ const config = {
 			'|',
 			'indent',
 			'outdent',
-			'|',
-			'imageUpload',
 			'blockQuote',
 			'insertTable',
-			'mediaEmbed',
 			'undo',
-			'redo'
+			'redo',
+			'|',
+			'imageUpload',
+			'mediaEmbed',
+			'blockQuote',
+			'insertTable',
 		]
 	},
 	image: {
@@ -127,7 +135,9 @@ const config = {
 			'|',
 			'imageResize',
 			'|',
-			'imageTextAlternative'
+			'imageTextAlternative',
+			'|',
+			'linkImage'
 		]
 	},
 	table: {
