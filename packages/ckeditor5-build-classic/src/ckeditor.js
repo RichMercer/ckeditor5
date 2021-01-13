@@ -35,6 +35,7 @@ import Table from '@ckeditor/ckeditor5-table/src/table';
 import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar';
 import TextTransformation from '@ckeditor/ckeditor5-typing/src/texttransformation';
 import SimpleUploadAdapter from '@ckeditor/ckeditor5-upload/src/adapters/simpleuploadadapter';
+import HorizontalLine from '@ckeditor/ckeditor5-horizontal-line/src/horizontalline';
 
 class ClassicEditor extends ClassicEditorBase {}
 class InlineEditor extends InlineEditorBase {}
@@ -68,7 +69,8 @@ const plugins = [
 	Table,
 	TableToolbar,
 	TextTransformation,
-	SimpleUploadAdapter
+	SimpleUploadAdapter,
+	HorizontalLine
 ];
 
 ClassicEditor.builtinPlugins = plugins;
@@ -90,6 +92,7 @@ const config = {
 			'indent',
 			'outdent',
 			'blockQuote',
+			'horizontalLine',
 			'insertTable',
 			'undo',
 			'redo',
