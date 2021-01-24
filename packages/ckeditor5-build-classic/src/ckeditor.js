@@ -33,9 +33,12 @@ import Paragraph from '@ckeditor/ckeditor5-paragraph/src/paragraph';
 import PasteFromOffice from '@ckeditor/ckeditor5-paste-from-office/src/pastefromoffice';
 import Table from '@ckeditor/ckeditor5-table/src/table';
 import TableToolbar from '@ckeditor/ckeditor5-table/src/tabletoolbar';
+import TableProperties from '@ckeditor/ckeditor5-table/src/tableproperties';
+import TableCellProperties from '@ckeditor/ckeditor5-table/src/tablecellproperties';
 import TextTransformation from '@ckeditor/ckeditor5-typing/src/texttransformation';
 import SimpleUploadAdapter from '@ckeditor/ckeditor5-upload/src/adapters/simpleuploadadapter';
 import HorizontalLine from '@ckeditor/ckeditor5-horizontal-line/src/horizontalline';
+import Alignment from '@ckeditor/ckeditor5-alignment/src/alignment';
 
 class ClassicEditor extends ClassicEditorBase {}
 class InlineEditor extends InlineEditorBase {}
@@ -68,9 +71,12 @@ const plugins = [
 	PasteFromOffice,
 	Table,
 	TableToolbar,
+	TableProperties, 
+	TableCellProperties,
 	TextTransformation,
 	SimpleUploadAdapter,
-	HorizontalLine
+	HorizontalLine,
+	Alignment
 ];
 
 ClassicEditor.builtinPlugins = plugins;
@@ -85,17 +91,16 @@ const config = {
 			'|',
 			'bold',
 			'italic',
+			'indent',
+			'outdent',
+			'alignment',
+			'|',
 			'link',
 			'bulletedList',
 			'numberedList',
-			'|',
-			'indent',
-			'outdent',
 			'blockQuote',
 			'horizontalLine',
 			'insertTable',
-			'undo',
-			'redo',
 			'|',
 			'imageUpload',
 			'mediaEmbed'
@@ -143,9 +148,7 @@ const config = {
 	},
 	table: {
 		contentToolbar: [
-			'tableColumn',
-			'tableRow',
-			'mergeTableCells'
+			'tableColumn', 'tableRow', 'mergeTableCells', 'tableProperties', 'tableCellProperties'
 		]
 	},
 	mediaEmbed: {
